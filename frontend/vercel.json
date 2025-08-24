@@ -4,11 +4,6 @@
   "outputDirectory": "dist/client",
   "framework": null,
   "installCommand": "npm install",
-  "functions": {
-    "server.js": {
-      "runtime": "nodejs18.x@latest"
-    }
-  },
   "routes": [
     {
       "src": "/(.*)",
