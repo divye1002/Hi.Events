@@ -47,6 +47,10 @@ services:
           name: hievents-db
           property: password
         key: DB_PASSWORD
+      - fromDatabase:
+          name: hievents-db
+          property: connectionString
+        key: DATABASE_URL
       
       # Mail Configuration (Postmark) - SET THESE IN RENDER DASHBOARD
       - key: MAIL_MAILER
@@ -106,4 +110,4 @@ databases:
   - name: hievents-db
     databaseName: hievents
     user: hievents
-    plan: free
+    plan: starter

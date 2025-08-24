@@ -14,7 +14,17 @@ sleep 3
 echo "⏳ Waiting for database connection..."
 TIMEOUT=120
 COUNTER=0
-until php artisan migrate:status > /dev/null 2>&1; do
+
+# Test database connection more reliably
+until php -r "
+try {
+    \$pdo = new PDO(\$_ENV['DATABASE_URL'] ?? 'pgsql:host='.\$_ENV['DB_HOST'].';port='.\$_ENV['DB_PORT'].';dbname='.\$_ENV['DB_DATABASE'], \$_ENV['DB_USERNAME'], \$_ENV['DB_PASSWORD']);
+    echo 'Database connected successfully';
+    exit(0);
+} catch (Exception \$e) {
+    exit(1);
+}
+" > /dev/null 2>&1; do
     if [ $COUNTER -ge $TIMEOUT ]; then
         echo "❌ Database connection timeout after ${TIMEOUT} seconds"
         echo "⚠️  Starting server without migrations (migrations will be attempted later)"
