@@ -6,7 +6,7 @@
   "installCommand": "npm install",
   "functions": {
     "server.js": {
-      "runtime": "nodejs18.x"
+      "runtime": "nodejs18.x@latest"
     }
   },
   "routes": [
