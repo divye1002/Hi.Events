@@ -64,3 +64,33 @@ Route::get('/clear-cache', function () {
         ], 500);
     }
 });
+
+// Create default account configuration
+Route::get('/create-account-config', function () {
+    try {
+        $accountConfig = \HiEvents\Models\AccountConfiguration::firstOrCreate(
+            ['is_system_default' => true],
+            [
+                'id' => 1,
+                'name' => 'Default',
+                'is_system_default' => true,
+                'application_fees' => [
+                    'percentage' => 1.5,
+                    'fixed' => 0,
+                ],
+            ]
+        );
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Account configuration created successfully',
+            'config' => $accountConfig,
+        ]);
+    } catch (Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Account configuration creation failed',
+            'error' => $e->getMessage(),
+        ], 500);
+    }
+});
