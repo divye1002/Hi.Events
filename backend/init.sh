@@ -2,10 +2,14 @@
 
 echo "🔄 Hi.Events: Initializing application..."
 
-# Run migrations in background (non-blocking)
+# Start PHP-FPM in daemon mode
+echo "🚀 Starting PHP-FPM..."
+php-fpm -D
+
+# Run migrations in background after services start
 (
-    echo "⏳ Waiting for database connection..."
-    sleep 10
+    echo "⏳ Waiting for services to start..."
+    sleep 20
     
     # Try to run migrations
     echo "🔄 Running database migrations..."
@@ -18,5 +22,6 @@ echo "🔄 Hi.Events: Initializing application..."
     echo "✅ Application initialization complete"
 ) &
 
-echo "🚀 Starting web server..."
-exec "$@"
+echo "🚀 Starting Nginx..."
+# Start Nginx in foreground (this keeps the container running)
+exec nginx -g "daemon off;"

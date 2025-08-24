@@ -41,6 +41,6 @@ RUN chmod +x /usr/local/bin/init.sh
 
 EXPOSE 8080
 
-# Use initialization script as entrypoint, keep original CMD
+# Use initialization script and then default base image CMD
 USER www-data
-ENTRYPOINT ["/usr/local/bin/init.sh"]
+CMD ["/usr/local/bin/init.sh"]
