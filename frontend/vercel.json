@@ -1,5 +1,22 @@
 {
-  "rewrites":  [
-    {"source": "/(.*)", "destination": "/"}
+  "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/client",
+  "framework": null,
+  "installCommand": "npm install",
+  "env": {
+    "VITE_API_URL_SERVER": "https://hi-events-ziek.onrender.com/api",
+    "VITE_API_URL_CLIENT": "https://hi-events-ziek.onrender.com/api"
+  },
+  "functions": {
+    "api/server.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api/server"
+    }
   ]
 }

@@ -31,4 +31,11 @@ RUN mkdir -p /var/www/html/vendor/ezyang/htmlpurifier/library/HTMLPurifier/Defin
     && chmod -R 775 /var/www/html/vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer \
     && chown -R www-data:www-data /var/www/html/vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer
 
+# Copy and make startup script executable
+COPY --chown=www-data:www-data scripts/render-start.sh /usr/local/bin/render-start.sh
+RUN chmod +x /usr/local/bin/render-start.sh
+
 EXPOSE 8080
+
+# Use the startup script as entrypoint
+ENTRYPOINT ["/usr/local/bin/render-start.sh"]
