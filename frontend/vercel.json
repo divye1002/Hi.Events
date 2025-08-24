@@ -7,7 +7,7 @@
   "env": {
     "VITE_API_URL_SERVER": "https://hievents-backend.onrender.com/api",
     "VITE_API_URL_CLIENT": "https://hievents-backend.onrender.com/api",
-    "VITE_FRONTEND_URL": "https://hievents.vercel.app",
+    "VITE_FRONTEND_URL": "https://hi-events.vercel.app",
     "VITE_APP_NAME": "Hi.Events",
     "NODE_ENV": "production"
   },

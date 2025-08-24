@@ -20,7 +20,7 @@ services:
       - key: APP_URL
         value: https://hievents-backend.onrender.com
       - key: APP_FRONTEND_URL
-        value: https://hievents.vercel.app
+        value: https://hi-events.vercel.app
       - key: APP_CDN_URL
         value: https://hievents-backend.onrender.com/storage
       
@@ -98,7 +98,7 @@ services:
       
       # CORS
       - key: CORS_ALLOWED_ORIGINS
-        value: https://hi-events-o4ehcb6ij-divye1002s-projects.vercel.app,https://hievents-backend.onrender.com
+        value: https://hi-events.vercel.app,https://hievents-backend.onrender.com
       
       # Optional: Disable registration
       - key: APP_DISABLE_REGISTRATION
