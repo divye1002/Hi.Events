@@ -8,10 +8,15 @@
     "VITE_API_URL_SERVER": "https://hi-events-ziek.onrender.com/api",
     "VITE_API_URL_CLIENT": "https://hi-events-ziek.onrender.com/api"
   },
-  "routes": [
+  "functions": {
+    "api/server.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "/server.js"
+      "source": "/(.*)",
+      "destination": "/api/server"
     }
   ]
 }
