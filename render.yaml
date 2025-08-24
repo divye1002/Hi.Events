@@ -52,7 +52,7 @@ services:
           property: connectionString
         key: DATABASE_URL
       
-      # Mail Configuration (Postmark) - SET THESE IN RENDER DASHBOARD
+      # Mail Configuration - Choose your option below
       - key: MAIL_MAILER
         value: log
       - key: MAIL_HOST
@@ -60,9 +60,9 @@ services:
       - key: MAIL_PORT
         value: 587
       - key: MAIL_USERNAME
-        value: YOUR_POSTMARK_SERVER_TOKEN
+        value: b2d0eecf-bb58-47bf-b0da-8de5611645e0
       - key: MAIL_PASSWORD
-        value: YOUR_POSTMARK_SERVER_TOKEN
+        value: b2d0eecf-bb58-47bf-b0da-8de5611645e0
       - key: MAIL_ENCRYPTION
         value: tls
       - key: MAIL_FROM_ADDRESS
@@ -96,9 +96,9 @@ services:
       - key: JWT_ALGO
         value: HS256
       
-      # Email Configuration - Disable for testing
+      # Email Configuration - Enable for testing
       - key: APP_ENFORCE_EMAIL_CONFIRMATION_DURING_REGISTRATION
-        value: false
+        value: true
       
       # CORS
       - key: CORS_ALLOWED_ORIGINS
