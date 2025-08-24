@@ -54,7 +54,7 @@ services:
       
       # Mail Configuration (Postmark) - SET THESE IN RENDER DASHBOARD
       - key: MAIL_MAILER
-        value: smtp
+        value: log
       - key: MAIL_HOST
         value: smtp.postmarkapp.com
       - key: MAIL_PORT
@@ -95,6 +95,10 @@ services:
         value: 2hoccgHb9r1fqW1lU16C6khSHVa7O0eai6FxkWK95UtQ0LqNDTO5mq1RzDwcq18I
       - key: JWT_ALGO
         value: HS256
+      
+      # Email Configuration - Disable for testing
+      - key: APP_ENFORCE_EMAIL_CONFIRMATION_DURING_REGISTRATION
+        value: false
       
       # CORS
       - key: CORS_ALLOWED_ORIGINS
