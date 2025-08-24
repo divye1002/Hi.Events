@@ -4,6 +4,15 @@
   "outputDirectory": "dist/client",
   "framework": null,
   "installCommand": "npm install",
+  "functions": {
+    "server.js": {
+      "runtime": "nodejs20.x"
+    }
+  },
+  "env": {
+    "VITE_API_URL_SERVER": "https://hi-events-ziek.onrender.com/api",
+    "VITE_API_URL_CLIENT": "https://hi-events-ziek.onrender.com/api"
+  },
   "routes": [
     {
       "src": "/(.*)",
