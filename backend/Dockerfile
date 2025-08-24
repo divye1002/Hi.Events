@@ -37,7 +37,6 @@ RUN chmod +x /usr/local/bin/start.sh
 
 EXPOSE 8080
 
-# Use our custom startup script
+# Use our custom startup script but keep the original entrypoint as CMD
 USER www-data
 ENTRYPOINT ["/usr/local/bin/start.sh"]
-CMD []

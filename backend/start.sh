@@ -2,13 +2,17 @@
 
 echo "🔄 Starting Hi.Events backend..."
 
-# Start web server in background first
-echo "🚀 Starting web server..."
-/usr/local/bin/entrypoint.sh &
+# Start PHP-FPM in background
+echo "🚀 Starting PHP-FPM..."
+php-fpm -D
+
+# Start Nginx in background
+echo "🚀 Starting Nginx..."
+nginx -g "daemon off;" &
 SERVER_PID=$!
 
 # Give the server a moment to start
-sleep 3
+sleep 5
 
 # Wait for database to be ready (with timeout)
 echo "⏳ Waiting for database connection..."
