@@ -1,22 +1,10 @@
 #!/bin/sh
 
-echo "🔄 Starting Hi.Events backend..."
-
-# Start PHP-FPM in background
-echo "🚀 Starting PHP-FPM..."
-php-fpm -D
-
-# Start Nginx in background
-echo "🚀 Starting Nginx..."
-nginx -g "daemon off;" &
-SERVER_PID=$!
-
-# Give the server a moment to start
-sleep 5
+echo "🔄 Hi.Events: Running database migrations..."
 
 # Wait for database to be ready (with timeout)
 echo "⏳ Waiting for database connection..."
-TIMEOUT=120
+TIMEOUT=60
 COUNTER=0
 
 # Test database connection more reliably
@@ -31,8 +19,7 @@ try {
 " > /dev/null 2>&1; do
     if [ $COUNTER -ge $TIMEOUT ]; then
         echo "❌ Database connection timeout after ${TIMEOUT} seconds"
-        echo "⚠️  Starting server without migrations (migrations will be attempted later)"
-        wait $SERVER_PID
+        echo "⚠️  Server will start without migrations"
         exit 0
     fi
     echo "Database not ready, waiting 5 seconds... (${COUNTER}/${TIMEOUT})"
@@ -56,7 +43,4 @@ php artisan config:cache || true
 php artisan route:cache || true
 php artisan view:cache || true
 
-echo "✅ Setup complete! Server is running."
-
-# Wait for the server process
-wait $SERVER_PID
+echo "✅ Database setup complete!"
