@@ -1,14 +1,9 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist/client",
+  "buildCommand": "npm run build:csr",
+  "outputDirectory": "dist",
   "framework": null,
-  "installCommand": "npm install",
-  "functions": {
-    "api/server.js": {
-      "runtime": "nodejs20.x"
-    }
-  },
+  "installCommand": "npm install --legacy-peer-deps",
   "env": {
     "VITE_API_URL_SERVER": "https://hievents-backend.onrender.com/api",
     "VITE_API_URL_CLIENT": "https://hievents-backend.onrender.com/api",
@@ -16,10 +11,13 @@
     "VITE_APP_NAME": "Hi.Events",
     "NODE_ENV": "production"
   },
-  "rewrites": [
+  "routes": [
     {
-      "source": "/(.*)",
-      "destination": "/api/server"
+      "handle": "filesystem"
+    },
+    {
+      "src": "/.*",
+      "dest": "/index.html"
     }
   ]
 }
