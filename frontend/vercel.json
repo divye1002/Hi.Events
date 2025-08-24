@@ -4,6 +4,11 @@
   "outputDirectory": "dist/client",
   "framework": null,
   "installCommand": "npm install",
+  "functions": {
+    "api/server.js": {
+      "runtime": "nodejs20.x"
+    }
+  },
   "env": {
     "VITE_API_URL_SERVER": "https://hievents-backend.onrender.com/api",
     "VITE_API_URL_CLIENT": "https://hievents-backend.onrender.com/api",
