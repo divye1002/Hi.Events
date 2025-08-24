@@ -103,7 +103,7 @@ services:
       
       # Security
       - key: JWT_SECRET
-        value: 2hoccgHb9r1fqW1lU16C6khSHVa7O0eai6FxkWK95UtQ0LqNDTO5mq1RzDwcq18I
+        value: noGIAxWm7SvT1vVqweRPlzsE0c7yJ00ZYGAKzz0iiszLyi6wCKj6HO86sT9GEYfr
       - key: JWT_ALGO
         value: HS256
       
@@ -122,6 +122,16 @@ databases:
     databaseName: hievents
     user: hievents
     plan: starter
+
+jobs:
+  - type: job
+    name: hievents-migrate
+    env: docker
+    rootDir: backend
+    dockerfilePath: Dockerfile
+    dockerContext: ../
+    plan: starter
+    startCommand: php artisan migrate --force
 EOF
 
 echo "📝 Updating frontend/vercel.json..."
