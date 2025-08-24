@@ -98,7 +98,7 @@ services:
       
       # CORS
       - key: CORS_ALLOWED_ORIGINS
-        value: https://hievents.vercel.app,https://hievents-backend.onrender.com
+        value: https://hi-events-o4ehcb6ij-divye1002s-projects.vercel.app,https://hievents-backend.onrender.com
       
       # Optional: Disable registration
       - key: APP_DISABLE_REGISTRATION
