@@ -10,8 +10,10 @@ import classes from "./Login.module.scss";
 import {t, Trans} from "@lingui/macro";
 import {useEffect, useState} from "react";
 import {ChooseAccountModal} from "../../../modals/ChooseAccountModal";
+import {useAuthStore} from "../../../../stores/auth.store.ts";
 
 const Login = () => {
+    const authStore = useAuthStore();
     const form = useForm({
         initialValues: {
             email: '',
@@ -26,6 +28,8 @@ const Login = () => {
 
         onSuccess: (response: LoginResponse) => {
             if (response.token) {
+                // Store the auth data in our auth store
+                authStore.setAuth(response);
                 redirectToPreviousUrl();
                 return;
             }

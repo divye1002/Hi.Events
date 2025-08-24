@@ -1,13 +1,11 @@
 services:
   - type: web
-    name: hievents-backend
+    name: hi-events-backend
     env: docker
     rootDir: backend
     dockerfilePath: Dockerfile
-    dockerContext: ../
-    plan: starter
-    region: oregon
-    branch: main
+    dockerContext: .
+    plan: free  # or starter/standard for production
     envVars:
       - key: APP_NAME
         value: Hi.Events
@@ -18,37 +16,35 @@ services:
       - key: APP_DEBUG
         value: false
       - key: APP_URL
-        value: https://hievents-backend.onrender.com
+        value: https://your-backend-service.onrender.com
       - key: APP_FRONTEND_URL
-        value: https://hievents.vercel.app
+        value: https://your-frontend.vercel.app
       - key: APP_CDN_URL
-        value: https://hievents-backend.onrender.com/storage
+        value: https://your-backend-service.onrender.com/storage
       
-      # Database (PostgreSQL)
+      # Database - use Render PostgreSQL
       - key: DB_CONNECTION
         value: pgsql
       - fromDatabase:
-          name: hievents-db
+          name: hi-events-db
           property: host
         key: DB_HOST
       - fromDatabase:
-          name: hievents-db
-          property: port
-        key: DB_PORT
-      - fromDatabase:
-          name: hievents-db
+          name: hi-events-db
           property: database
         key: DB_DATABASE
       - fromDatabase:
-          name: hievents-db
+          name: hi-events-db
           property: user
         key: DB_USERNAME
       - fromDatabase:
-          name: hievents-db
+          name: hi-events-db
           property: password
         key: DB_PASSWORD
+      - key: DB_PORT
+        value: 5432
       
-      # Mail Configuration (Postmark) - SET THESE IN RENDER DASHBOARD
+      # Mail Configuration (Your Postmark)
       - key: MAIL_MAILER
         value: smtp
       - key: MAIL_HOST
@@ -56,19 +52,17 @@ services:
       - key: MAIL_PORT
         value: 587
       - key: MAIL_USERNAME
-        value: YOUR_POSTMARK_SERVER_TOKEN
+        value: b2d0eecf-bb58-47bf-b0da-8de5611645e0
       - key: MAIL_PASSWORD
-        value: YOUR_POSTMARK_SERVER_TOKEN
+        value: b2d0eecf-bb58-47bf-b0da-8de5611645e0
       - key: MAIL_ENCRYPTION
         value: tls
       - key: MAIL_FROM_ADDRESS
         value: divye@skoch.in
       - key: MAIL_FROM_NAME
         value: Hi.Events
-      - key: MAIL_FROM_NAME
-        value: Hi.Events
       
-      # Cache and Storage
+      # Other settings
       - key: CACHE_DRIVER
         value: file
       - key: FILESYSTEM_PUBLIC_DISK
@@ -79,33 +73,16 @@ services:
         value: database
       - key: SESSION_DRIVER
         value: file
-      - key: SESSION_LIFETIME
-        value: 120
-      
-      # Logging
       - key: LOG_CHANNEL
         value: stderr
       - key: LOG_LEVEL
         value: info
-      
-      # Security
       - key: JWT_SECRET
         value: 2hoccgHb9r1fqW1lU16C6khSHVa7O0eai6FxkWK95UtQ0LqNDTO5mq1RzDwcq18I
       - key: JWT_ALGO
         value: HS256
-      
-      # CORS
-      - key: CORS_ALLOWED_ORIGINS
-        value: https://hievents.vercel.app,https://hievents-backend.onrender.com
-      
-      # Optional: Disable registration
-      - key: APP_DISABLE_REGISTRATION
-        value: false
-      - key: APP_PLATFORM_SUPPORT_EMAIL
-        value: divye@skoch.in
 
 databases:
-  - name: hievents-db
+  - name: hi-events-db
     databaseName: hievents
     user: hievents
-    plan: starter

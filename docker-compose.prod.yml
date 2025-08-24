@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.all-in-one
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./backend/storage:/app/backend/storage
+      - ./backend/.env:/app/backend/.env
+      - ./ssl:/etc/ssl/certs  # Mount SSL certificates if using HTTPS
+    environment:
+      - APP_ENV=production
+    depends_on:
+      - db
+      - redis
+    restart: unless-stopped
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: hievents
+      POSTGRES_USER: hievents
+      POSTGRES_PASSWORD: your_secure_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:

@@ -5,8 +5,11 @@
   "framework": null,
   "installCommand": "npm install",
   "env": {
-    "VITE_API_URL_SERVER": "https://hi-events-ziek.onrender.com/api",
-    "VITE_API_URL_CLIENT": "https://hi-events-ziek.onrender.com/api"
+    "VITE_API_URL_SERVER": "https://hievents-backend.onrender.com/api",
+    "VITE_API_URL_CLIENT": "https://hievents-backend.onrender.com/api",
+    "VITE_FRONTEND_URL": "https://hievents.vercel.app",
+    "VITE_APP_NAME": "Hi.Events",
+    "NODE_ENV": "production"
   },
   "functions": {
     "api/server.js": {

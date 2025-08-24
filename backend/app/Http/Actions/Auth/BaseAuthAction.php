@@ -18,8 +18,8 @@ abstract class BaseAuthAction extends BaseAction
         return Cookie::make(
             name: 'token',
             value: $token,
-            secure: true,
-            sameSite: 'None',
+            secure: app()->environment('production'), // Only secure in production
+            sameSite: app()->environment('production') ? 'None' : 'Lax', // More permissive in development
         );
     }
 
