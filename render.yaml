@@ -111,22 +111,3 @@ databases:
     databaseName: hievents
     user: hievents
     plan: free
-
-jobs:
-  - type: job
-    name: hievents-migrate
-    env: docker
-    rootDir: backend
-    dockerfilePath: Dockerfile
-    dockerContext: .
-    plan: starter
-    startCommand: php artisan migrate --force
-    envVars:
-      - key: APP_ENV
-        value: production
-      - key: APP_KEY
-        value: base64:RXenjrLNBANtw5wTwXg17irDteyQurwSxJsncHYABC8=
-      - fromDatabase:
-          name: hievents-db
-          property: connectionString
-        key: DATABASE_URL

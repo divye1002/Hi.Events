@@ -35,7 +35,12 @@ RUN mkdir -p /var/www/html/vendor/ezyang/htmlpurifier/library/HTMLPurifier/Defin
     && chmod -R 775 /var/www/html/vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer \
     && chown -R www-data:www-data /var/www/html/vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer
 
+# Copy initialization script
+COPY init.sh /usr/local/bin/init.sh
+RUN chmod +x /usr/local/bin/init.sh
+
 EXPOSE 8080
 
-# Use default entrypoint from base image which handles PHP-FPM and Nginx
+# Use initialization script as entrypoint, keep original CMD
 USER www-data
+ENTRYPOINT ["/usr/local/bin/init.sh"]
