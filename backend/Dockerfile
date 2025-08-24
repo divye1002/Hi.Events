@@ -35,12 +35,7 @@ RUN mkdir -p /var/www/html/vendor/ezyang/htmlpurifier/library/HTMLPurifier/Defin
     && chmod -R 775 /var/www/html/vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer \
     && chown -R www-data:www-data /var/www/html/vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer
 
-# Copy migration script
-COPY migrate.sh /usr/local/bin/migrate.sh
-RUN chmod +x /usr/local/bin/migrate.sh
-
 EXPOSE 8080
 
-# Use the base image's default startup but run migrations in background
+# Use the default approach from the base image - no custom modifications
 USER www-data
-CMD ["/bin/sh", "-c", "/usr/local/bin/migrate.sh & exec /init"]
