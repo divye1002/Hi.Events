@@ -21,6 +21,10 @@ Route::get('/', function () {
 // One-time setup route for database migrations
 Route::get('/setup-database', function () {
     try {
+        // Run queue table creation first
+        Artisan::call('queue:table');
+        $queueTableOutput = Artisan::output();
+        
         // Run migrations
         Artisan::call('migrate', ['--force' => true]);
         $migrateOutput = Artisan::output();
@@ -32,6 +36,7 @@ Route::get('/setup-database', function () {
         return response()->json([
             'success' => true,
             'message' => 'Database setup completed successfully',
+            'queue_table_output' => $queueTableOutput,
             'migrate_output' => $migrateOutput,
             'storage_output' => $storageOutput,
         ]);
