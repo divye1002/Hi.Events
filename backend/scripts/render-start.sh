@@ -44,5 +44,6 @@ chmod -R 755 bootstrap/cache
 
 echo "Hi.Events backend deployment complete!"
 
-# Start the application
-exec "$@"
+# Start PHP-FPM and Nginx via supervisord
+echo "Starting PHP-FPM and Nginx..."
+exec supervisord -c /etc/supervisor/conf.d/supervisord.conf
