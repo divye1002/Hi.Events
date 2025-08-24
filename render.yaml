@@ -5,7 +5,51 @@ services:
     rootDir: backend
     dockerfilePath: Dockerfile
     dockerContext: .
-    plan: starter
+    plan: free
     envVars:
+      - key: APP_NAME
+        value: Hi.Events
       - key: APP_ENV
         value: production
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://hi-events-ziek.onrender.com
+      - key: APP_FRONTEND_URL
+        value: https://hi-events.vercel.app
+      - key: APP_CDN_URL
+        value: https://hi-events-ziek.onrender.com/storage
+      - key: DB_CONNECTION
+        value: sqlite
+      - key: DB_DATABASE
+        value: /tmp/database.sqlite
+      - key: DB_FOREIGN_KEYS
+        value: true
+      - key: MAIL_MAILER
+        value: log
+      - key: CACHE_DRIVER
+        value: file
+      - key: FILESYSTEM_PUBLIC_DISK
+        value: public
+      - key: FILESYSTEM_PRIVATE_DISK
+        value: local
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: SESSION_DRIVER
+        value: file
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: LOG_LEVEL
+        value: error
+      - key: CORS_ALLOWED_ORIGINS
+        value: https://hi-events.vercel.app,https://hi-events-ziek.onrender.com
+      - key: JWT_SECRET
+        value: 2hoccgHb9r1fqW1lU16C6khSHVa7O0eai6FxkWK95UtQ0LqNDTO5mq1RzDwcq18I
+      - key: JWT_ALGO
+        value: HS256
+      - key: APP_DISABLE_REGISTRATION
+        value: false
+      - key: APP_PLATFORM_SUPPORT_EMAIL
+        value: support@your-website.com
