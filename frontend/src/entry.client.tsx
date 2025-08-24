@@ -5,6 +5,7 @@ import {router} from "./router";
 import {App} from "./App";
 import {queryClient} from "./utilites/queryClient";
 import {dynamicActivateLocale, getClientLocale, getSupportedLocale,} from "./locales.ts";
+import {useAuthStore} from "./stores/auth.store.ts";
 
 declare global {
     interface Window {
@@ -15,6 +16,9 @@ declare global {
 const dehydratedState = window.__REHYDRATED_STATE__;
 
 async function initClientApp() {
+    // Initialize auth store from localStorage
+    useAuthStore().initialize();
+    
     const rawLocale = getClientLocale();
     const locale = getSupportedLocale(rawLocale);
     await dynamicActivateLocale(locale);

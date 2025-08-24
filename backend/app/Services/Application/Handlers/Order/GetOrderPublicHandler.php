@@ -49,10 +49,17 @@ class GetOrderPublicHandler
 
     private function verifySessionId(string $orderSessionId): void
     {
+        $currentSessionId = $this->sessionIdentifierService->getSessionId();
+        
         if (!$this->sessionIdentifierService->verifySession($orderSessionId)) {
-            throw new UnauthorizedException(
-                __('Sorry, we could not verify your session. Please restart your order.')
-            );
+            // Add debug information in development
+            $message = __('Sorry, we could not verify your session. Please restart your order.');
+            
+            if (config('app.debug')) {
+                $message .= " [Debug: Expected session_id: {$orderSessionId}, Got: {$currentSessionId}]";
+            }
+            
+            throw new UnauthorizedException($message);
         }
     }
 

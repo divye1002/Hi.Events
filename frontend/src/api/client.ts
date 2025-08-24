@@ -1,6 +1,7 @@
 import axios from "axios";
 import {isSsr} from "../utilites/helpers.ts";
 import {getConfig} from "../utilites/config.ts";
+import {useAuthStore} from "../stores/auth.store.ts";
 
 const BASE_URL = isSsr()
     ? getConfig('VITE_API_URL_SERVER')
@@ -37,16 +38,22 @@ export const api = axios.create({
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        const { status } = error.response;
+        const { status } = error.response || {};
         const currentPath = window?.location.pathname;
-        const isAllowedUnauthenticatedPath = ALLOWED_UNAUTHENTICATED_PATHS.some(path => currentPath.includes(path));
-        const isManageEventPath = currentPath.startsWith('/manage/event/');
+        const isAllowedUnauthenticatedPath = ALLOWED_UNAUTHENTICATED_PATHS.some(path => currentPath?.includes(path));
+        const isManageEventPath = currentPath?.startsWith('/manage/event/');
         const isAuthError = status === 401 || status === 403;
 
         if (isAuthError && (!isAllowedUnauthenticatedPath || isManageEventPath)) {
-            // Store the current URL before redirecting to the login page
-            window?.localStorage?.setItem(PREVIOUS_URL_KEY, window?.location.href);
-            window?.location?.replace(LOGIN_PATH);
+            // Clear auth store when we get auth errors
+            if (typeof window !== 'undefined') {
+                const authStore = useAuthStore();
+                authStore.clearAuth();
+                
+                // Store the current URL before redirecting to the login page
+                window.localStorage?.setItem(PREVIOUS_URL_KEY, window.location.href);
+                window.location?.replace(LOGIN_PATH);
+            }
         }
 
         return Promise.reject(error);
