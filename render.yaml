@@ -5,7 +5,7 @@ services:
     rootDir: backend
     dockerfilePath: Dockerfile
     dockerContext: ../
-    plan: starter
+    plan: free
     region: oregon
     branch: develop
     envVars:
@@ -106,4 +106,4 @@ databases:
   - name: hievents-db
     databaseName: hievents
     user: hievents
-    plan: starter
+    plan: free
