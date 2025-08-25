@@ -1,12 +1,12 @@
 <x-mail::layout>
     {{-- Header --}}
     <x-slot:header>
-        <x-mail::header :url="config('app.email_logo_link_url')">
+        <x-mail::header :url="https://skoch.in/">
             @if($appLogo = config('app.email_logo_url'))
                 <img src="{{ $appLogo }}" class="logo" alt="{{ config('app.name') }}"
                      style="max-width: 300px;">
             @else
-                <img src="{{ config('app.frontend_url') }}/logo-dark.png" class="logo" alt="{{ config('app.name') }}"
+                <img src="https://lh3.googleusercontent.com/a/ACg8ocLIzB9XthSchg7acFb9-AFtmSkiQy3mLwB6FI5sfw5CASPoQW8=s40-p" class="logo" alt="{{ config('app.name') }}"
                      style="max-width: 300px;">
             @endif
         </x-mail::header>
