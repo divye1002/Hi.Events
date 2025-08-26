@@ -1,10 +1,7 @@
 <x-mail::layout>
     {{-- Header --}}
     <x-slot:header>
-        <x-mail::header :url="config('app.email_logo_link_url')">
-          <img src="https://skoch-assets.s3.amazonaws.com/main/uploads/skoch-main-site-logo-image.png" class="logo" alt="Skoch Group Logo"
-              style="max-width: 300px;">
-        </x-mail::header>
+    <!-- Removed old logo and link -->
     </x-slot:header>
                     <div style="text-align: center; margin-bottom: 24px;">
                         <a href="https://summit.skoch.in/" target="_blank" rel="noopener">
