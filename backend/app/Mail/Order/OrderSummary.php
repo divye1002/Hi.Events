@@ -34,7 +34,7 @@ class OrderSummary extends BaseMail
     {
         return new Envelope(
             replyTo: $this->eventSettings->getSupportEmail(),
-            subject: __('Your Order is Confirmed!') . '  🎉',
+            subject: __('Your Registration is Confirmed!') . '  🎉',
         );
     }
 

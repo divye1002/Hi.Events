@@ -2,7 +2,7 @@
     {{-- Header --}}
     <x-slot:header>
         <x-mail::header :url="config('app.email_logo_link_url')">
-          <img src="https://skoch-assets.s3.amazonaws.com/main/uploads/skoch-main-site-logo-image.png" class="logo" alt="Skoch Group Logo"
+          <img src="https://skoch-assets.s3.amazonaws.com/ief/uploads/2019/07/SKOCH-Group-Logo.png" class="logo" alt="Skoch Group Logo"
               style="max-width: 300px;">
         </x-mail::header>
     </x-slot:header>
