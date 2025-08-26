@@ -1,10 +1,10 @@
 <x-mail::layout>
     {{-- Header --}}
     <x-slot:header>
-        <div style="text-align: center; margin-bottom: 24px;">
-          <img src="https://lh3.googleusercontent.com/chat_attachment/AP1Ws4tJL1sXjdCfLqzB18F-VZbU-tiFiZtR-2S7SBFxdBg51cFJmfYyomDMcntKNZbpqHKMpglICWD7nlYLOQ983pG_M6unyPaEyVPdTg2gj2_rdrZfwuPt3d3-9eoZKFgE9qqAxRIXcgeA-LRemJA-95gDNw4DsXnU-8vl8nuWB40BL6Xt-3bCnletVa6RVsDUJkC48Z2uBfEHeY3Z_hPt2FhQeDCFh4P54520fy6A_KJQkf-EfKqOmNkhPoJWNZDA29j6GaCZZiBMSeDRlH5jG7FEMK1xZEsyPhR-iArsw7WKHvicRP0pbT2scaEtLPW6jp4=w512" class="logo" alt="Event Logo"
+        <x-mail::header :url="config('app.email_logo_link_url')">
+          <img src="https://skoch-assets.s3.amazonaws.com/main/uploads/skoch-main-site-logo-image.png" class="logo" alt="Skoch Group Logo"
               style="max-width: 300px;">
-        </div>
+        </x-mail::header>
     </x-slot:header>
 
     {{-- Body --}}
