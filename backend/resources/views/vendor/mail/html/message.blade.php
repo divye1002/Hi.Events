@@ -2,13 +2,8 @@
     {{-- Header --}}
     <x-slot:header>
         <x-mail::header :url="config('app.email_logo_link_url')">
-            @if($appLogo = config('app.email_logo_url'))
-                <img src="{{ $appLogo }}" class="logo" alt="{{ config('app.name') }}"
-                     style="max-width: 300px;">
-            @else
-                <img src="{{ config('app.frontend_url') }}/logo-dark.png" class="logo" alt="{{ config('app.name') }}"
-                     style="max-width: 300px;">
-            @endif
+          <img src="https://skoch-assets.s3.amazonaws.com/main/uploads/skoch-main-site-logo-image.png" class="logo" alt="Skoch Group Logo"
+              style="max-width: 300px;">
         </x-mail::header>
     </x-slot:header>
 
