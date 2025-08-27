@@ -82,7 +82,7 @@ export const App: FC<
                             <title>SKOCH Summit</title>
                             <link rel="icon"
                                 type="image/png"
-                                href="https://skoch-assets.s3.amazonaws.com/ief/uploads/2019/07/SKOCH-Group-Logo.png"
+                                href="https://skoch-assets.s3.amazonaws.com/main/uploads/cropped-skoch-main-site-favico-image-180x180.png"
                             />
                                     </Helmet>
                                     {props.children}
