@@ -536,12 +536,6 @@ const SelectProducts = (props: SelectProductsProps) => {
                 </form>
             )}
             <div className={'hi-promo-code-row'}>
-                {(!showPromoCodeInput && !form.values.promo_code) && (
-                    <Anchor className={'hi-have-a-promo-code-link'}
-                            onClick={() => setShowPromoCodeInput(true)}>
-                        {t`Have a promo code?`}
-                    </Anchor>
-                )}
                 {form.values.promo_code && (
                     <div className={'hi-promo-code-applied'}>
                         <span><b>{form.values.promo_code}</b> {t`applied`}</span>
