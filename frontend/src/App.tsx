@@ -79,11 +79,11 @@ export const App: FC<
                                 <ThirdPartyScripts/>
                                 <ModalsProvider>
                                     <Helmet>
-                                        <title>{getConfig("VITE_APP_NAME", "Hi.Events")}</title>
-                                        <link rel="icon"
-                                              type="image/svg+xml"
-                                              href={getConfig("VITE_APP_FAVICON", "/favicon.svg")}
-                                        />
+                            <title>SKOCH Summit</title>
+                            <link rel="icon"
+                                type="image/png"
+                                href="https://skoch-assets.s3.amazonaws.com/ief/uploads/2019/07/SKOCH-Group-Logo.png"
+                            />
                                     </Helmet>
                                     {props.children}
                                 </ModalsProvider>
