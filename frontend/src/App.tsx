@@ -79,7 +79,7 @@ export const App: FC<
                                 <ThirdPartyScripts/>
                                 <ModalsProvider>
                                     <Helmet>
-                                        <title>{getConfig("VITE_APP_NAME", "SKOCH Summit")}</title>
+                                        <title>SKOCH Summit</title>
                                         <link rel="icon"
                                               type="image/svg+xml"
                                               href="https://skoch-assets.s3.amazonaws.com/main/uploads/cropped-skoch-main-site-favico-image-180x180.png"
