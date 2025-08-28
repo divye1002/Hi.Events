@@ -1,4 +1,4 @@
-import {t, Trans} from "@lingui/macro";
+import { t, Trans } from "@lingui/macro";
 import {
     ActionIcon,
     Anchor,
@@ -11,31 +11,31 @@ import {
     TextInput,
     UnstyledButton
 } from "@mantine/core";
-import {useNavigate, useParams} from "react-router";
-import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {notifications} from "@mantine/notifications";
+import { useNavigate, useParams } from "react-router";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { notifications } from "@mantine/notifications";
 import {
     orderClientPublic,
     ProductFormPayload,
     ProductFormValue,
     ProductPriceQuantityFormValue
 } from "../../../../api/order.client.ts";
-import {useForm} from "@mantine/form";
-import {range, useInputState, useResizeObserver} from "@mantine/hooks";
-import React, {useEffect, useMemo, useRef, useState} from "react";
-import {showError, showInfo, showSuccess} from "../../../../utilites/notifications.tsx";
-import {addQueryStringToUrl, isObjectEmpty, removeQueryStringFromUrl} from "../../../../utilites/helpers.ts";
-import {TieredPricing} from "./Prices/Tiered";
+import { useForm } from "@mantine/form";
+import { range, useInputState, useResizeObserver } from "@mantine/hooks";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { showError, showInfo, showSuccess } from "../../../../utilites/notifications.tsx";
+import { addQueryStringToUrl, isObjectEmpty, removeQueryStringFromUrl } from "../../../../utilites/helpers.ts";
+import { TieredPricing } from "./Prices/Tiered";
 import classNames from 'classnames';
 import '../../../../styles/widget/default.scss';
-import {ProductAvailabilityMessage} from "../../../common/ProductPriceAvailability";
-import {PoweredByFooter} from "../../../common/PoweredByFooter";
-import {Event, Product} from "../../../../types.ts";
-import {eventsClientPublic} from "../../../../api/event.client.ts";
-import {promoCodeClientPublic} from "../../../../api/promo-code.client.ts";
-import {IconChevronRight, IconX} from "@tabler/icons-react"
-import {getSessionIdentifier} from "../../../../utilites/sessionIdentifier.ts";
-import {Constants} from "../../../../constants.ts";
+import { ProductAvailabilityMessage } from "../../../common/ProductPriceAvailability";
+import { PoweredByFooter } from "../../../common/PoweredByFooter";
+import { Event, Product } from "../../../../types.ts";
+import { eventsClientPublic } from "../../../../api/event.client.ts";
+import { promoCodeClientPublic } from "../../../../api/promo-code.client.ts";
+import { IconChevronRight, IconX } from "@tabler/icons-react"
+import { getSessionIdentifier } from "../../../../utilites/sessionIdentifier.ts";
+import { Constants } from "../../../../constants.ts";
 
 const AFFILIATE_EXPIRY_DAYS = 30;
 
@@ -78,7 +78,7 @@ interface SelectProductsProps {
 }
 
 const SelectProducts = (props: SelectProductsProps) => {
-    const {eventId} = useParams();
+    const { eventId } = useParams();
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
@@ -99,7 +99,7 @@ const SelectProducts = (props: SelectProductsProps) => {
         const affiliateCodeFromUrl = new URLSearchParams(window.location.search).get('aff');
 
         if (affiliateCodeFromUrl) {
-            const data = {code: affiliateCodeFromUrl, timestamp: now};
+            const data = { code: affiliateCodeFromUrl, timestamp: now };
             localStorage.setItem(storageKey, JSON.stringify(data));
             setAffiliateCode(affiliateCodeFromUrl);
             return;
@@ -201,8 +201,8 @@ const SelectProducts = (props: SelectProductsProps) => {
 
     const selectedProductQuantitySum = useMemo(() => {
         let total = 0;
-        form.values.products?.forEach(({quantities}) => {
-            quantities?.forEach(({quantity}) => {
+        form.values.products?.forEach(({ quantities }) => {
+            quantities?.forEach(({ quantity }) => {
                 total += Number(quantity);
             });
         });
@@ -295,15 +295,15 @@ const SelectProducts = (props: SelectProductsProps) => {
 
     return (
         <div className={'hi-product-widget-container'}
-             ref={resizeRef}
-             style={{
-                 '--widget-background-color': props.colors?.background,
-                 '--widget-primary-color': props.colors?.primary,
-                 '--widget-primary-text-color': props.colors?.primaryText,
-                 '--widget-secondary-color': props.colors?.secondary,
-                 '--widget-secondary-text-color': props.colors?.secondaryText,
-                 '--widget-padding': props?.padding,
-             } as React.CSSProperties}>
+            ref={resizeRef}
+            style={{
+                '--widget-background-color': props.colors?.background,
+                '--widget-primary-color': props.colors?.primary,
+                '--widget-primary-text-color': props.colors?.primaryText,
+                '--widget-secondary-color': props.colors?.secondary,
+                '--widget-secondary-text-color': props.colors?.secondaryText,
+                '--widget-padding': props?.padding,
+            } as React.CSSProperties}>
             {!productAreAvailable && (
                 <div className={classNames(['hi-no-products'])}>
                     <p className={classNames(['hi-no-products-message'])}>
@@ -334,7 +334,7 @@ const SelectProducts = (props: SelectProductsProps) => {
                         gap: '16px',
                         color: props.colors?.primaryText || 'inherit'
                     }}>
-                        <div style={{width: '100%'}}>
+                        <div style={{ width: '100%' }}>
                             <h3 style={{
                                 margin: '0 0 12px 0',
                                 fontSize: '20px',
@@ -411,7 +411,7 @@ const SelectProducts = (props: SelectProductsProps) => {
                                     {category.description && (
                                         <div className={'hi-product-category-description'}>
                                             <Spoiler maxHeight={500} showLabel={t`Show more`} hideLabel={t`Hide`}>
-                                                <div dangerouslySetInnerHTML={{__html: category.description}}/>
+                                                <div dangerouslySetInnerHTML={{ __html: category.description }} />
                                             </Spoiler>
                                         </div>
                                     )}
@@ -441,8 +441,8 @@ const SelectProducts = (props: SelectProductsProps) => {
                                                 <div key={product.id} className={'hi-product-row'}>
                                                     <div className={'hi-title-row'}>
                                                         <UnstyledButton variant={'transparent'}
-                                                                        className={'hi-product-title'}
-                                                                        onClick={toggleCollapse}
+                                                            className={'hi-product-title'}
+                                                            onClick={toggleCollapse}
                                                         >
                                                             <h3>
                                                                 {product.title}
@@ -465,18 +465,18 @@ const SelectProducts = (props: SelectProductsProps) => {
 
                                                                 {(!product.is_available && product.type === 'TIERED') && (
                                                                     <ProductAvailabilityMessage product={product}
-                                                                                                event={event}/>
+                                                                        event={event} />
                                                                 )}
 
                                                                 <span className={`hi-product-collapse-arrow`}>
-                                                                <IconChevronRight
-                                                                    className={isProductCollapsed ? "" : "open"}/>
+                                                                    <IconChevronRight
+                                                                        className={isProductCollapsed ? "" : "open"} />
                                                                 </span>
                                                             </div>
                                                         </UnstyledButton>
                                                     </div>
                                                     <Collapse transitionDuration={100} in={!isProductCollapsed}
-                                                              className={'hi-product-content'}>
+                                                        className={'hi-product-content'}>
                                                         <div className={'hi-price-tiers-rows'}>
                                                             <TieredPricing
                                                                 productIndex={productIndex++}
@@ -486,7 +486,7 @@ const SelectProducts = (props: SelectProductsProps) => {
                                                             />
                                                         </div>
 
-                                                        {product.max_per_order && form.values.products && isObjectEmpty(form.errors) && (form.values.products[productIndex]?.quantities.reduce((acc, {quantity}) => acc + Number(quantity), 0) > product.max_per_order) && (
+                                                        {product.max_per_order && form.values.products && isObjectEmpty(form.errors) && (form.values.products[productIndex]?.quantities.reduce((acc, { quantity }) => acc + Number(quantity), 0) > product.max_per_order) && (
                                                             <div className={'hi-product-quantity-error'}>
                                                                 <Trans>The maximum number of products
                                                                     for {product.title}
@@ -504,10 +504,10 @@ const SelectProducts = (props: SelectProductsProps) => {
                                                             <div
                                                                 className={'hi-product-description-row'}>
                                                                 <Spoiler maxHeight={87} showLabel={t`Show more`}
-                                                                         hideLabel={t`Hide`}>
+                                                                    hideLabel={t`Hide`}>
                                                                     <div dangerouslySetInnerHTML={{
                                                                         __html: product.description
-                                                                    }}/>
+                                                                    }} />
                                                                 </Spoiler>
                                                             </div>
                                                         )}
@@ -522,14 +522,55 @@ const SelectProducts = (props: SelectProductsProps) => {
                     </div>
 
                     <div className={'hi-footer-row'}>
+                        <div>
+                            Welcome to summit.skoch.in. Skoch Consultancy Services Pvt Ltd (“SKOCH”) provides this site to you subject to the following conditions. By visiting the summit.skoch.in site (the “Site”), you accept these conditions. Please read them carefully. In addition, when you use any current or future SKOCH service or business, you also will be subject to the guidelines, terms and agreements applicable to such service or business.
+                            These ‘Conditions of Use’ constitute an electronic record within the meaning of the applicable law. This electronic record is generated by a computer system and does not require any physical or digital signatures.
+
+                            Privacy The Webinar Site is hosted and operated by SKOCH. Please review the applicable Privacy Policy, which also governs your visit to this Site, to understand practices related to your information provided through this Site.
+
+                            Electronic Communications When you visit the Site or send e-mails to us, you are communicating with us electronically. You consent to receive communications from us electronically. We will communicate with you by e-mail or by posting notices on this Site or through any other means available under applicable law. You agree that all agreements, notices, disclosures and other communications that we provide to you electronically satisfy any legal requirement that such communications be in writing.
+
+                            Copyright All content included on this Site, such as text, graphics, logos, button icons, images, audio clips, digital downloads, data compilations, and software, is the property of SKOCH or its affiliates or its content suppliers and protected by India and international copyright laws. The compilation of all content on this Site is the exclusive property of SKOCH or its affiliates and protected by India and international copyright laws.
+
+                            Trademarks SKOCH, the SKOCH logo, Event / Summit Logo & Name, and other marks indicated on our Site are intellectual property of SKOCH or its affiliates in India. Other SKOCH graphics, logos, page headers, button icons, scripts, and service names are trademarks or trade dress of SKOCH or its affiliates. SKOCH and its affiliates’ trademarks and trade dress may not be used in connection with any product or service that is not SKOCH or its affiliates’ as applicable, in any manner that is likely to cause confusion among users, or in any manner that disparages or discredits SKOCH or its affiliates. All other trademarks not owned by SKOCH or its affiliates that appear on this Site are the property of their respective owners, who may or may not be affiliated with, connected to, or sponsored by SKOCH or its affiliates.
+
+                            License and site access SKOCH grants you a limited license to access and make personal use of this Site and not to download (other than page caching) or modify it, or any portion of it, except with express written consent of SKOCH and / or its affiliates, as may be applicable. This license does not include any resale or commercial use of this Site or its contents; any derivative use of this Site or its contents; or any use of data mining, robots, or similar data gathering and extraction tools. This Site or any portion of this Site (including but not limited to any copyrighted material, trademarks, or other proprietary information) may not be reproduced, duplicated, copied, sold, resold, visited, or otherwise exploited for any commercial purpose without express written consent of SKOCH and / or its affiliates, as may be applicable. You may not frame or utilize framing techniques to enclose any trademark, logo, or other proprietary information (including images, text, page layout, or form) of SKOCH or its affiliates without their express written consent. You may not use any meta tags or any other “hidden text” utilizing SKOCH's or its affiliates name or trademarks without their express written consent. Any unauthorized use terminates the permission or license granted by SKOCH and / or its affiliates. You are granted a limited, non-assignable, revocable, and non-exclusive right to create a hyperlink to the home page of this Site so long as the link does not portray SKOCH, its affiliates, or their products or services in a false, misleading, derogatory, or otherwise offensive matter. You may not use any logo or other proprietary graphic or trademark of SKOCH or its affiliates as part of the link without their express written permission. In case the event organised on our platform is sponsored the participants data may be shared with the sponsor(s).
+
+                            Your activity on the the Site: This Site is not intended for use by children. If you are a minor i.e. under the age of 18 years, you may use the Site only with involvement of a parent or guardian. SKOCH and its affiliates reserve the right to refuse service, terminate accounts, or remove or edit content in their sole discretion.
+
+                            You must not use the Site in any way that causes, or is likely to cause, the Site or access to it to be interrupted, damaged or impaired in any way.
+
+                            You understand that you, and not SKOCH, are responsible for all electronic communications and content sent from your computer to us and you must use the Site for lawful purposes only and only in accordance with the applicable law.
+
+                            You must not use the Site for any of the following:
+                            for fraudulent purposes, or in connection with a criminal offence or other unlawful activity; to send, use or reuse any material that is illegal, offensive, (including but not limited to material that is sexually explicit or which promotes racism, bigotry, hatred or physical harm), abusive, harassing, misleading, indecent, defamatory, disparaging, obscene or menacing; or in breach of copyright, trademark, confidentiality, privacy or any other proprietary information or right; or is otherwise injurious to third parties; or objectionable or otherwise unlawful in any manner whatsoever; or which consists of or contains software viruses, political campaigning, commercial solicitation, chain letters, mass mailings or any “spam”; and to cause annoyance, inconvenience or needless anxiety.
+
+                            Your License If you submit material, and unless we indicate otherwise, you grant SKOCH and its affiliates a nonexclusive, royalty-free, irrevocable, perpetual and fully sublicensable right to use, reproduce, modify, adapt, publish, translate, create derivative works from, distribute, and display such content throughout the world in any media for as long as you are permitted to grant the said licence under applicable law. You grant SKOCH and its affiliates and sublicensees the right to use the name that you submit in connection with such content, if they choose. You represent and warrant that you own or otherwise control all of the rights to the content or material that you post or submit or that you otherwise provide on or through the Site; that the content is accurate; that the content is lawful; that use of the content you supply does not violate this policy and will not cause injury to any person or entity; and that you will indemnify SKOCH and its affiliates for all claims arising from content you supply. SKOCH has the right but not the obligation to monitor and edit or remove any activity or content. SKOCH takes no responsibility and assumes no liability for any content submitted by you or any third party.
+
+                            Copyright Complaints SKOCH and its affiliates respect the intellectual property of others. If you believe that your work has been copied in a way that constitutes infringement of your intellectual property, please follow our Trademark and Copyright policy below.
+
+                            Services Description SKOCH and its affiliates attempt to be as accurate as possible. However, SKOCH does not warrant that descriptions of or other content of this Site is accurate, complete, reliable, current, or error-free. Also, your access to the Site may also be occasionally suspended or restricted to allow for repairs, maintenance, or the introduction of new facilities or at any time without prior notice. We will attempt to limit the frequency and duration of any such suspension or restriction. SKOCH provides links to other Sites over which SKOCH has no control. SKOCH is not responsible for the availability of such external sites or resources and does not endorse and is not responsible or liable for any content, advertising, products or other material on or available from such sites or resources.
+
+                            Disclaimer of warranties and limitation of liabilities
+                            This Site is provided by SKOCH on an “as is” and “as available” basis. SKOCH makes no representations or warranties of any kind, express or implied, as to the operation of this Site or the information, content, materials, or products included on this Site. You expressly agree that your use of this Site is at your sole risk. SKOCH reserves the right to withdraw or delete any information from this Site at any time in its discretion.
+                            To the full extent permissible by applicable law, SKOCH disclaims all warranties, express or implied, including, but not limited to, implied warranties of merchantability and fitness for a particular purpose. SKOCH does not warrant that this Site, its servers, or e-mail sent from SKOCH are free of viruses or other harmful components. SKOCH will not be liable for any damages of any kind arising from the use of this Site, including, but not limited to direct, indirect, incidental, punitive and consequential damages.
+
+                            Applicable Law By visiting this Site, you agree that the laws of India will govern these Terms of Use and any dispute of any sort that might arise between you and SKOCH or its affiliates.
+
+                            Disputes Any dispute relating in any way to your visit to this Site shall be submitted to the exclusive jurisdiction of the courts at Delhi, India.
+
+                            Site Policies, Modification and Severability We reserve the right to make changes to our Site, policies, and these Terms of Use at any time. If any of these conditions shall be deemed invalid, void, or for any reason unenforceable, that condition shall be deemed severable and shall not affect the validity and enforceability of any remaining condition.
+
+                            Our Address This Site is owned by Skoch Consultancy Services Pvt Ltd, A-222, Sushant Lok, Phase I, Gurgaon – 122001
+                        </div>
                         {event?.settings?.product_page_message && (
                             <div dangerouslySetInnerHTML={{
                                 __html: event.settings.product_page_message.replace(/\n/g, '<br/>')
-                            }} className={'hi-product-page-message'}/>
+                            }} className={'hi-product-page-message'} />
                         )}
                         <Button disabled={isButtonDisabled} fullWidth className={'hi-continue-button'}
-                                type={"submit"}
-                                loading={productMutation.isPending}>
+                            type={"submit"}
+                            loading={productMutation.isPending}>
                             {props.continueButtonText || event?.settings?.continue_button_text || t`Continue`}
                         </Button>
                     </div>
@@ -548,7 +589,7 @@ const SelectProducts = (props: SelectProductsProps) => {
                                 promoCodeEventRefetchMutation.mutate(null)
                             }}
                         >
-                            <IconX stroke={1.5} size={20}/>
+                            <IconX stroke={1.5} size={20} />
                         </ActionIcon>
                     </div>
                 )}
@@ -557,15 +598,15 @@ const SelectProducts = (props: SelectProductsProps) => {
                     <Group className={'hi-promo-code-input-wrapper'} wrap={'nowrap'} gap={'20px'}>
                         {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
                         {/*@ts-ignore*/}
-                        <TextInput autoFocus classNames={{input: 'hi-promo-code-input'}} onKeyDown={(event) => {
+                        <TextInput autoFocus classNames={{ input: 'hi-promo-code-input' }} onKeyDown={(event) => {
                             if (event.key === 'Enter') {
                                 event.preventDefault();
                                 handleApplyPromoCode();
                             }
-                        }} mb={0} ref={promoRef}/>
+                        }} mb={0} ref={promoRef} />
                         <Button disabled={promoCodeEventRefetchMutation.isPending}
-                                className={'hi-apply-promo-code-button'} variant={'outline'}
-                                onClick={handleApplyPromoCode}>
+                            className={'hi-apply-promo-code-button'} variant={'outline'}
+                            onClick={handleApplyPromoCode}>
                             {t`Apply Promo Code`}
                         </Button>
                         <ActionIcon
@@ -575,7 +616,7 @@ const SelectProducts = (props: SelectProductsProps) => {
                             title={t`Close`}
                             onClick={() => setShowPromoCodeInput(false)}
                         >
-                            <IconX stroke={1.5} size={20}/>
+                            <IconX stroke={1.5} size={20} />
                         </ActionIcon>
                     </Group>
                 )}
@@ -599,7 +640,7 @@ const SelectProducts = (props: SelectProductsProps) => {
             {(props.showPoweredBy ?? true) && (
                 <PoweredByFooter style={{
                     'color': props.colors?.primaryText || '#000',
-                }}/>
+                }} />
             )}
         </div>
     );
