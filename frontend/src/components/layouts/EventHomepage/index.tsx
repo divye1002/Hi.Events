@@ -1,21 +1,21 @@
-import {EventInformation} from "./EventInformation";
+import { EventInformation } from "./EventInformation";
 import classes from "./EventHomepage.module.scss";
 import SelectProducts from "../../routes/product-widget/SelectProducts";
 import "../../../styles/widget/default.scss";
-import React, {useEffect, useRef, useState} from "react";
-import {EventDocumentHead} from "../../common/EventDocumentHead";
-import {eventCoverImageUrl, imageUrl, organizerHomepageUrl} from "../../../utilites/urlHelper.ts";
-import {Event, OrganizerStatus} from "../../../types.ts";
-import {EventNotAvailable} from "./EventNotAvailable";
-import {IconExternalLink, IconMail, IconMapPin, IconTicket, IconWorld} from "@tabler/icons-react";
-import {Anchor, Button} from "@mantine/core";
-import {t} from "@lingui/macro";
-import {PoweredByFooter} from "../../common/PoweredByFooter";
-import {ContactOrganizerModal} from "../../common/ContactOrganizerModal";
-import {socialMediaConfig} from "../../../constants/socialMediaConfig";
-import {getGoogleMapsUrl, getShortLocationDisplay} from "../../../utilites/addressUtilities.ts";
-import {StatusToggle} from "../../common/StatusToggle";
-import {getConfig} from "../../../utilites/config.ts";
+import React, { useEffect, useRef, useState } from "react";
+import { EventDocumentHead } from "../../common/EventDocumentHead";
+import { eventCoverImageUrl, imageUrl, organizerHomepageUrl } from "../../../utilites/urlHelper.ts";
+import { Event, OrganizerStatus } from "../../../types.ts";
+import { EventNotAvailable } from "./EventNotAvailable";
+import { IconExternalLink, IconMail, IconMapPin, IconTicket, IconWorld } from "@tabler/icons-react";
+import { Anchor, Button } from "@mantine/core";
+import { t } from "@lingui/macro";
+import { PoweredByFooter } from "../../common/PoweredByFooter";
+import { ContactOrganizerModal } from "../../common/ContactOrganizerModal";
+import { socialMediaConfig } from "../../../constants/socialMediaConfig";
+import { getGoogleMapsUrl, getShortLocationDisplay } from "../../../utilites/addressUtilities.ts";
+import { StatusToggle } from "../../common/StatusToggle";
+import { getConfig } from "../../../utilites/config.ts";
 
 interface EventHomepageProps {
     colors?: {
@@ -33,8 +33,8 @@ interface EventHomepageProps {
     promoCode?: string;
 }
 
-const EventHomepage = ({colors, continueButtonText, backgroundType, ...loaderData}: EventHomepageProps) => {
-    const {event, promoCodeValid, promoCode} = loaderData;
+const EventHomepage = ({ colors, continueButtonText, backgroundType, ...loaderData }: EventHomepageProps) => {
+    const { event, promoCodeValid, promoCode } = loaderData;
     const [showScrollButton, setShowScrollButton] = useState(false);
     const [contactModalOpen, setContactModalOpen] = useState(false);
     const ticketsSectionRef = useRef<HTMLDivElement>(null);
@@ -77,7 +77,7 @@ const EventHomepage = ({colors, continueButtonText, backgroundType, ...loaderDat
     }, []);
 
     const scrollToTickets = () => {
-        ticketsSectionRef.current?.scrollIntoView({behavior: 'smooth', block: 'start'});
+        ticketsSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 
     const styleOverrides = {
@@ -96,7 +96,7 @@ const EventHomepage = ({colors, continueButtonText, backgroundType, ...loaderDat
     } as React.CSSProperties;
 
     if (!event) {
-        return <EventNotAvailable/>;
+        return <EventNotAvailable />;
     }
 
     const coverImage = eventCoverImageUrl(event);
@@ -139,16 +139,16 @@ const EventHomepage = ({colors, continueButtonText, backgroundType, ...loaderDat
                         }
                     `}
                 </style>
-                {event && <EventDocumentHead event={event}/>}
+                {event && <EventDocumentHead event={event} />}
                 {(coverImage && backgroundType === 'MIRROR_COVER_IMAGE') && (
                     <div
                         className={classes.background}
-                        style={{backgroundImage: `url(${coverImage})`}}
+                        style={{ backgroundImage: `url(${coverImage})` }}
                     />
                 )}
                 {(!coverImage || backgroundType === 'COLOR') &&
                     <div className={classes.background}
-                         style={{backgroundColor: 'var(--homepage-body-background-color)'}}
+                        style={{ backgroundColor: 'var(--homepage-body-background-color)' }}
                     />
                 }
                 <div id={"event-homepage"} className={classes.mainContainer}>
@@ -164,7 +164,7 @@ const EventHomepage = ({colors, continueButtonText, backgroundType, ...loaderDat
                             </div>
                         )}
                         <div className={classes.sectionContent}>
-                            <EventInformation event={event} organizer={organizer}/>
+                            <EventInformation event={event} organizer={organizer} />
                         </div>
                     </div>
 
@@ -205,7 +205,7 @@ const EventHomepage = ({colors, continueButtonText, backgroundType, ...loaderDat
                         </div>
                     </div>
 
-                    {/* Organizer Section */}
+                    {/* Organizer Section
                     {organizer && organizer.status === OrganizerStatus.LIVE && (
                         <div className={classes.contentSection}>
                             <div className={classes.sectionContent}>
@@ -229,7 +229,7 @@ const EventHomepage = ({colors, continueButtonText, backgroundType, ...loaderDat
 
                                             {getShortLocationDisplay(organizerLocation) && (
                                                 <div className={classes.organizerLocation}>
-                                                    <IconMapPin size={16}/>
+                                                    <IconMapPin size={16} />
                                                     <Anchor
                                                         href={getGoogleMapsUrl(organizerLocation!)}
                                                         target="_blank"
@@ -238,14 +238,14 @@ const EventHomepage = ({colors, continueButtonText, backgroundType, ...loaderDat
                                                     >
                                                         <span>{getShortLocationDisplay(organizerLocation)}</span>
                                                         &nbsp;
-                                                        <IconExternalLink size={14}/>
+                                                        <IconExternalLink size={14} />
                                                     </Anchor>
                                                 </div>
                                             )}
 
                                             {websiteUrl && (
                                                 <div className={classes.organizerWebsite}>
-                                                    <IconWorld size={16}/>
+                                                    <IconWorld size={16} />
                                                     <Anchor
                                                         href={websiteUrl}
                                                         target="_blank"
@@ -266,7 +266,7 @@ const EventHomepage = ({colors, continueButtonText, backgroundType, ...loaderDat
                                         />
                                     )}
                                     <div className={classes.organizerSocials}>
-                                        {socialLinks.map(({platform, handle, config}) => {
+                                        {socialLinks.map(({ platform, handle, config }) => {
                                             const IconComponent = config.icon;
                                             const url = config.baseUrl + handle;
                                             return (
@@ -277,12 +277,12 @@ const EventHomepage = ({colors, continueButtonText, backgroundType, ...loaderDat
                                                     rel="noopener noreferrer"
                                                     className={classes.socialLink}
                                                 >
-                                                    <IconComponent size={24}/>
+                                                    <IconComponent size={24} />
                                                 </Anchor>
                                             );
                                         })}
                                         <Button
-                                            leftSection={<IconMail size={16}/>}
+                                            leftSection={<IconMail size={16} />}
                                             onClick={() => setContactModalOpen(true)}
                                             className={classes.contactButton}
                                             variant="outline"
@@ -294,7 +294,7 @@ const EventHomepage = ({colors, continueButtonText, backgroundType, ...loaderDat
                                 </div>
                             </div>
                         </div>
-                    )}
+                    )} */}
 
                     {/* Footer Section */}
                     <div className={classes.contentSection}>
@@ -329,7 +329,7 @@ const EventHomepage = ({colors, continueButtonText, backgroundType, ...loaderDat
                         <Button
                             className={classes.scrollToTicketsButton}
                             onClick={scrollToTickets}
-                            leftSection={<IconTicket size={20}/>}
+                            leftSection={<IconTicket size={20} />}
                             size="md"
                             radius="xl"
                             style={{
